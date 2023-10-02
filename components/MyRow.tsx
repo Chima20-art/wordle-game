@@ -4,7 +4,7 @@ import Box from "./Box";
 interface props {
   rowIndex: number;
   word: Array<string>;
-  guessedWord: Array<any>;
+  guessedWord: string;
   isWord: Boolean;
   count: number;
   finalWord: string;

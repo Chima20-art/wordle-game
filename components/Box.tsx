@@ -31,9 +31,11 @@ export default function Box({
   }
   return (
     <div
-      className={`${extraClasses} w-14 h-14 border rounded flex text-xl font-medium items-center justify-center relative uppercase`}
+      className={`${extraClasses} md:w-14 md:h-14 w-10 h-10 border rounded text-xl font-medium 
+      uppercase`}
     >
-      <div>{letter}</div>  
+      <div className="flex items-center justify-center h-full ">{letter}</div>
+        
     </div>
   );
 }
