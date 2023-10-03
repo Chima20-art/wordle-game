@@ -25,17 +25,15 @@ export default function Colums({
           count={count}
           rowIndex={index}
           isWord={isWord}
-          guessedWord={guessedWords[index]}
+          guessedWords={guessedWords}
           word={index == count ? word : []}
         />
       </div>
     );
   }
 
-  console.log("guessedWords in :", guessedWords);
-
   return (
-    <div className=" flex flex-col w-full items-center justify-center ">
+    <div className=" flex flex-col w-full items-center justify-center py-4 ">
       <div className="text-3xl text-center">{finalWord}</div>
       <div className="flex flex-col gap-1">{Columns}</div>
     </div>

@@ -68,7 +68,6 @@ export default function Home() {
 
   const processEnter = () => {
     const joinedWord = word.join("").toLocaleLowerCase();
-    console.log("joinedWord", joinedWord);
 
     if (words.includes(joinedWord)) {
       setIsWord(true);
@@ -96,16 +95,13 @@ export default function Home() {
 
     let wordLength = word.length;
     if (alphabets.includes(pressedKey)) {
-      console.log("wordLength ", wordLength);
       if (wordLength < 5) {
         setWord((prev) => [...prev, pressedKey]);
       } else {
-        console.log("word.length < 5 is false");
         console.log("word length is ", word.length);
       }
     } else {
       if (pressedKey == "Backspace" || pressedKey == "Bspace") {
-        console.log("word id sliced!");
         setWord((word) => word.slice(0, -1));
       }
       if (wordLength == 5 && pressedKey == "Enter") {
@@ -116,7 +112,6 @@ export default function Home() {
     }
   };
   useEffect(() => {
-    console.log("guessed words", guessedWords);
     if (guessedWords.length >= 1) {
       let lastGuessedWord = guessedWords[guessedWords.length - 1];
       if (lastGuessedWord == finalWord) {
@@ -141,7 +136,7 @@ export default function Home() {
   }, [word]);
 
   return (
-    <div className="flex flex-col justify-center items-start  h-[100vh] w-full">
+    <div className="flex flex-col justify-start items-start  h-[100vh] w-full">
       <Colums
         word={word}
         isWord={isWord}

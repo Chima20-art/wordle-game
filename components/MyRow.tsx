@@ -4,7 +4,7 @@ import Box from "./Box";
 interface props {
   rowIndex: number;
   word: Array<string>;
-  guessedWord: string;
+  guessedWords: Array<string>;
   isWord: Boolean;
   count: number;
   finalWord: string;
@@ -13,14 +13,12 @@ interface props {
 export default function MyRow({
   rowIndex,
   word,
-  guessedWord,
+  guessedWords,
   isWord,
   count,
   finalWord,
 }: props) {
   const boxes = [];
-
-  console.log("guessedWord in", rowIndex, " myRow:", guessedWord);
 
   for (let index = 0; index < 5; index++) {
     boxes.push(
@@ -31,7 +29,10 @@ export default function MyRow({
         key={index}
         index={index}
         isWord={isWord}
-        letter={guessedWord ? guessedWord[index] : word[index]}
+        guessedWords={guessedWords}
+        letter={
+          guessedWords[rowIndex] ? guessedWords[rowIndex][index] : word[index]
+        }
       />
     );
   }
