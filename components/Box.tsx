@@ -23,13 +23,6 @@ export default function Box({
 }: props) {
   let extraClasses = "bg-white border-gray-300";
 
-  console.log("finalWord", finalWord);
-  console.log("guessedWords", guessedWords[rowIndex]);
-  let arr = finalWord?.split("");
-
-  console.log("arr", arr);
-  useEffect(() => {}, [guessedWords]);
-
   const getColorOfLetter = () => {
     let currentWord = guessedWords[rowIndex];
     let indexesOfLetter: any = [];
@@ -87,7 +80,6 @@ export default function Box({
     closed: { scale: 1 },
   };
 
-  console.log("isWord", isWord);
   return (
     <motion.div
       animate={letter ? "open" : "closed"}

@@ -111,7 +111,6 @@ export default function Home() {
       );
     }
   };
-  console.log("popUp", popUp);
   const handleGame = () => {
     if (popUp == "lose") {
       <div>you lost!</div>;
@@ -134,7 +133,6 @@ export default function Home() {
     const getRandom = (words: string[]) => {
       const randomWord = Math.floor(Math.random() * words.length);
       setFinalWord(words[randomWord]);
-      console.log("chosenWord:", words[randomWord]);
     };
     getRandom(words);
   }, []);
@@ -158,8 +156,6 @@ export default function Home() {
       if (wordLength == 5 && pressedKey == "Enter") {
         processEnter();
       }
-
-      console.log("pressed key in not in alphabets");
     }
   };
   useEffect(() => {
@@ -169,7 +165,7 @@ export default function Home() {
         setIsPlaying(false);
         setPopUp("win");
         notify();
-      } else if (guessedWords.length == 1 && lastGuessedWord != finalWord) {
+      } else if (guessedWords.length == 6 && lastGuessedWord != finalWord) {
         setPopUp("lose");
         setIsPlaying(false);
         notify();
