@@ -34,11 +34,11 @@ export default function Keyboard({
       if (validLetters.includes(key)) {
         return "bg-green-400 text-white px-0 w-full";
       } else if (includedLetters.includes(key)) {
-        return "bg-orange-400 text-white px-0 w-full";
+        return "bg-yellow-400 text-white px-0 w-full";
       } else if (guessedLetters.includes(key)) {
-        return "bg-gray-400 text-white px-0 w-full";
+        return "bg-gray-400 text-white px-0 w-full  hover:bg-gray-500";
       } else {
-        return "bg-gray-200 px-0 w-full";
+        return "bg-gray-200 px-0 w-full hover:bg-gray-300";
       }
     } else {
       return "px-[12px] w-full bg-gray-200 hover:bg-gray-300";
