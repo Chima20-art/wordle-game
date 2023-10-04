@@ -133,7 +133,7 @@ export default function Home() {
     return () => {
       window.removeEventListener("keydown", passKey);
     };
-  }, [word]);
+  }, [word, isPlaying]);
 
   return (
     <div className="flex flex-col justify-start items-start  h-[100vh] w-full">
