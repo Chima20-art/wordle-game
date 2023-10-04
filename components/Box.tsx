@@ -85,15 +85,12 @@ export default function Box({
   const variants = {
     open: { scale: [1.1, 1] },
     closed: { scale: 1 },
-    flip: { rotate: [0, 180, 360] },
   };
 
   console.log("isWord", isWord);
   return (
     <motion.div
-      animate={
-        letter ? (isWord && rowIndex <= count - 1 ? "flip" : "open") : "closed"
-      }
+      animate={letter ? "open" : "closed"}
       variants={variants}
       transition={{ duration: 0.5 }}
       className={`${extraClasses} ${
