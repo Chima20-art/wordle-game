@@ -1,4 +1,5 @@
 import React from "react";
+import { BsBackspace } from "react-icons/bs";
 
 interface props {
   handKeyDown: (pressedKey: string) => void;
@@ -30,7 +31,7 @@ export default function Keyboard({
 
   const handleExtraClasses = (key: string) => {
     key = key.toLocaleLowerCase();
-    if (key != "Enter" && key != "Bspace") {
+    if (key != "enter" && key != "bspace") {
       if (validLetters.includes(key)) {
         return "bg-green-400 text-white px-0 w-full";
       } else if (includedLetters.includes(key)) {
@@ -41,7 +42,7 @@ export default function Keyboard({
         return "bg-gray-200 px-0 w-full hover:bg-gray-300";
       }
     } else {
-      return "px-[12px] w-full bg-gray-200 hover:bg-gray-300";
+      return "px-[14px] w-full bg-gray-200 hover:bg-gray-300";
     }
   };
 
@@ -99,9 +100,9 @@ export default function Keyboard({
               onClick={() => handKeyDown(key)}
               className={`${handleExtraClasses(
                 key
-              )}  text-center py-[6px] text-md cursor-pointer rounded-md `}
+              )}  text-center py-[6px] text-md cursor-pointer rounded-md flex justify-center items-center `}
             >
-              {key}
+              {key == "Bspace" ? <BsBackspace /> : key}
             </div>
           );
         })}

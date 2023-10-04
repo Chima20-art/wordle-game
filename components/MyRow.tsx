@@ -28,10 +28,10 @@ export default function MyRow({
         key={"box-" + index}
         animate={
           rowIndex <= count - 1 && {
-            rotateX: [0, 360],
+            rotateX: [0, 180, 270, 360],
           }
         }
-        transition={{ duration: 0.1, delay: 0.2 * index }}
+        transition={{ duration: 0.05, delay: 0.15 * index }}
       >
         <Box
           finalWord={finalWord}

@@ -2,6 +2,12 @@ import Colums from "@/components/Colums";
 import Keyboard from "@/components/Keyboard";
 import { useState, useEffect } from "react";
 import words from "../utils/words.json";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Router, useRouter } from "next/router";
+import Lost from "@/components/Lost";
+import Won from "@/components/Won";
+import Description from "@/components/Description";
 
 let alphabets: string[] = [
   "a",
@@ -65,6 +71,52 @@ export default function Home() {
   let [count, setCount] = useState<number>(0);
   let [finalWord, setFinalWord] = useState<string>("");
   let [isPlaying, setIsPlaying] = useState<Boolean>(true);
+  let [popUp, setPopUp] = useState<string>("");
+  const router = useRouter();
+
+  const notify = () => {
+    if (popUp == "win") {
+      toast(
+        <div className=" text-center flex flex-col font-bold">
+          You won! <br />
+          <button
+            onClick={() => {
+              router.reload();
+            }}
+            className="bg-green-500 py-2 my-2 px-4 max-w-[150px] mx-auto rounded-md text-white"
+          >
+            Play again
+          </button>
+        </div>
+      );
+    }
+    if (popUp == "lose") {
+      toast(
+        <div className=" text-center flex flex-col">
+          You lost! <br />
+          <div>
+            {" "}
+            The answer was:
+            <span className="text-2xl font-bold"> {finalWord}</span>
+          </div>
+          <button
+            onClick={() => {
+              router.reload();
+            }}
+            className="bg-green-500 py-2 my-2 px-4 max-w-[150px] mx-auto rounded-md text-white"
+          >
+            Play again
+          </button>
+        </div>
+      );
+    }
+  };
+  console.log("popUp", popUp);
+  const handleGame = () => {
+    if (popUp == "lose") {
+      <div>you lost!</div>;
+    }
+  };
 
   const processEnter = () => {
     const joinedWord = word.join("").toLocaleLowerCase();
@@ -73,10 +125,9 @@ export default function Home() {
       setIsWord(true);
       setCount((count) => count + 1);
       setGuessedWords([...guessedWords, joinedWord]);
-
       setWord([]);
     } else {
-      alert("word not found");
+      toast(<div className="text-center">Word not found 🙅🏻‍♂️ ❌</div>);
     }
   };
   useEffect(() => {
@@ -115,21 +166,23 @@ export default function Home() {
     if (guessedWords.length >= 1) {
       let lastGuessedWord = guessedWords[guessedWords.length - 1];
       if (lastGuessedWord == finalWord) {
-        alert("You won!");
         setIsPlaying(false);
-      } else if (guessedWords.length == 6 && lastGuessedWord != finalWord) {
-        alert("You lose!");
+        setPopUp("win");
+        notify();
+      } else if (guessedWords.length == 1 && lastGuessedWord != finalWord) {
+        setPopUp("lose");
         setIsPlaying(false);
+        notify();
       }
     }
-  }, [guessedWords]);
+  }, [guessedWords, popUp]);
 
   useEffect(() => {
     const passKey = (e: any) => {
       handKeyDown(e.key);
     };
 
-    window.addEventListener("keydown", passKey);
+    window.addEventListener("keydown", passKey, { passive: false });
     return () => {
       window.removeEventListener("keydown", passKey);
     };
@@ -144,11 +197,14 @@ export default function Home() {
         finalWord={finalWord}
         guessedWords={guessedWords}
       />
+      {popUp && (popUp == "lose" ? <Lost /> : <Won />)}
       <Keyboard
         finalWord={finalWord}
         guessedWords={guessedWords}
         handKeyDown={handKeyDown}
       />
+      <Description />
+      <ToastContainer position="top-center" autoClose={isWord ? false : 1000} />
     </div>
   );
 }
