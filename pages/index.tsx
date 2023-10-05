@@ -208,7 +208,7 @@ export default function Home() {
         <meta property="og:image" content="/logo.png" />
       </Head>
       <div className="flex flex-col justify-between  items-start  w-screen min-h-screen  m-0 p-0 ">
-        <div className="my-4 md:w-[604px] w-full flex justify-between mx-auto px-16">
+        <div className="my-8 md:w-[604px] w-full flex justify-between mx-auto px-10">
           <div className="flex flex-row">
             {" "}
             <img src="/logo.png" width={24} height={24} />{" "}
