@@ -8,6 +8,7 @@ import { Router, useRouter } from "next/router";
 import Lost from "@/components/Lost";
 import Won from "@/components/Won";
 import Description from "@/components/Description";
+import Confetti from "@/components/Confetti";
 
 let alphabets: string[] = [
   "a",
@@ -210,7 +211,8 @@ export default function Home() {
         </a>{" "}
         development.
       </p>
-      <ToastContainer position="top-center" autoClose={isWord ? 2000 : false} />
+      {popUp == "win" && <Confetti popUp={popUp} />}
+      <ToastContainer position="top-center" autoClose={isWord ? false : 2000} />
     </div>
   );
 }
