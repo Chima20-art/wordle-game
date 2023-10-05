@@ -9,6 +9,7 @@ import Lost from "@/components/Lost";
 import Won from "@/components/Won";
 import Description from "@/components/Description";
 import Confetti from "@/components/Confetti";
+import { IoRefreshOutline } from "react-icons/io5";
 
 let alphabets: string[] = [
   "a",
@@ -75,14 +76,25 @@ export default function Home() {
   let [popUp, setPopUp] = useState<string>("");
   const router = useRouter();
 
+  const refresh = () => {
+    router.reload();
+  };
+
   const notify = () => {
+    if (popUp == "") {
+      toast(
+        <div className=" text-center flex flex-col font-bold">
+          Guess the word!
+        </div>
+      );
+    }
     if (popUp == "win") {
       toast(
         <div className=" text-center flex flex-col font-bold">
           You won! <br />
           <button
             onClick={() => {
-              router.reload();
+              refresh();
             }}
             className="bg-green-500 py-2 my-2 px-4 max-w-[150px] mx-auto rounded-md text-white"
           >
@@ -166,6 +178,8 @@ export default function Home() {
         setIsPlaying(false);
         notify();
       }
+    } else {
+      notify();
     }
   }, [guessedWords, popUp]);
 
@@ -181,7 +195,13 @@ export default function Home() {
   }, [word, isPlaying]);
 
   return (
-    <div className="flex flex-col justify-between items-start  h-[100vh] w-full m-0 p-0">
+    <div className="flex flex-col justify-between items-start  h-[100vh] w-full m-0 p-0 ">
+      <div className="my-4 md:w-[604px] w-full flex justify-end items-end  mx-auto px-8">
+        <IoRefreshOutline
+          className="md:w-6 md:h-6 w-5 h-5 cursor-pointer"
+          onClick={() => refresh()}
+        />
+      </div>
       <Colums
         word={word}
         isWord={isWord}
@@ -204,13 +224,12 @@ export default function Home() {
             href="https://www.michich.com/"
             className="font-bold md:text-xs text-[10px] hover:underline"
           >
-            Michich
+            Chaimae Michich
           </a>{" "}
-          development.
         </p>
       </div>
       {popUp == "win" && <Confetti popUp={popUp} />}
-      <ToastContainer position="top-center" autoClose={isWord ? false : 2000} />
+      <ToastContainer position="top-center" autoClose={isWord ? false : 1000} />
     </div>
   );
 }
