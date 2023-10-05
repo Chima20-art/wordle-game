@@ -196,7 +196,7 @@ export default function Home() {
   }, [word, isPlaying]);
 
   return (
-    <div>
+    <>
       <Head>
         <title>Wordle game</title>
         <meta name="description" content="Guess the Hidden Word" key="desc" />
@@ -207,7 +207,7 @@ export default function Home() {
         />
         <meta property="og:image" content="/logo.png" />
       </Head>
-      <div className="flex flex-col justify-between items-start  h-[100vh] w-full m-0 p-0 ">
+      <div className="flex flex-col justify-between  items-start  w-screen min-h-screen  m-0 p-0 ">
         <div className="my-4 md:w-[604px] w-full flex justify-between mx-auto px-16">
           <div className="flex flex-row">
             {" "}
@@ -233,7 +233,7 @@ export default function Home() {
           handKeyDown={handKeyDown}
         />
 
-        <div className="bottom-0 justify-self-end">
+        <div className="">
           <Description />
           <p className="bg-[#ecf0e2] w-full text-center text-gray-500 md:text-xs text-[10px] pb-4">
             @2023 developed by{" "}
@@ -246,11 +246,8 @@ export default function Home() {
           </p>
         </div>
         {popUp == "win" && <Confetti popUp={popUp} />}
-        <ToastContainer
-          position="top-center"
-          autoClose={isWord ? false : 1000}
-        />
       </div>
-    </div>
+      <ToastContainer position="top-center" autoClose={isWord ? false : 1000} />
+    </>
   );
 }
