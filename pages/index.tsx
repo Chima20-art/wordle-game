@@ -200,7 +200,17 @@ export default function Home() {
         handKeyDown={handKeyDown}
       />
       <Description />
-      <ToastContainer position="top-center" autoClose={isWord ? false : 1000} />
+      <p className="bg-[#ecf0e2] w-full text-center text-gray-500 text-xs pb-4">
+        @2023 developed by{" "}
+        <a
+          href="https://www.michich.com/"
+          className="font-bold text-xs hover:underline"
+        >
+          Michich
+        </a>{" "}
+        development.
+      </p>
+      <ToastContainer position="top-center" autoClose={isWord ? 2000 : false} />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 export default function Description() {
   return (
-    <div className="bg-[#ecf0e2] flex flex-col w-full justify-center items-center py-8 my-12 text-3xl">
+    <div className="bg-[#ecf0e2] flex flex-col w-full justify-center items-center py-8 mt-12 text-3xl">
       <strong className="text-3xl pb-4 ">
         Wordle Game: Guess the Hidden Word
       </strong>
