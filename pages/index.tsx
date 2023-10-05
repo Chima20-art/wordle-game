@@ -112,11 +112,6 @@ export default function Home() {
       );
     }
   };
-  const handleGame = () => {
-    if (popUp == "lose") {
-      <div>you lost!</div>;
-    }
-  };
 
   const processEnter = () => {
     const joinedWord = word.join("").toLocaleLowerCase();
@@ -186,7 +181,7 @@ export default function Home() {
   }, [word, isPlaying]);
 
   return (
-    <div className="flex flex-col justify-start items-start  h-[100vh] w-full">
+    <div className="flex flex-col justify-between items-start  h-[100vh] w-full m-0 p-0">
       <Colums
         word={word}
         isWord={isWord}
@@ -200,17 +195,20 @@ export default function Home() {
         guessedWords={guessedWords}
         handKeyDown={handKeyDown}
       />
-      <Description />
-      <p className="bg-[#ecf0e2] w-full text-center text-gray-500 text-xs pb-4">
-        @2023 developed by{" "}
-        <a
-          href="https://www.michich.com/"
-          className="font-bold text-xs hover:underline"
-        >
-          Michich
-        </a>{" "}
-        development.
-      </p>
+
+      <div className="bottom-0 justify-self-end">
+        <Description />
+        <p className="bg-[#ecf0e2] w-full text-center text-gray-500 md:text-xs text-[10px] pb-4">
+          @2023 developed by{" "}
+          <a
+            href="https://www.michich.com/"
+            className="font-bold md:text-xs text-[10px] hover:underline"
+          >
+            Michich
+          </a>{" "}
+          development.
+        </p>
+      </div>
       {popUp == "win" && <Confetti popUp={popUp} />}
       <ToastContainer position="top-center" autoClose={isWord ? false : 2000} />
     </div>
