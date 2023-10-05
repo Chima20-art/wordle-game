@@ -195,6 +195,8 @@ export default function Home() {
     };
   }, [word, isPlaying]);
 
+  console.log("finalWord", finalWord);
+
   return (
     <>
       <Head>
