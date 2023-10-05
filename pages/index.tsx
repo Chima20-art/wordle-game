@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Colums from "@/components/Colums";
 import Keyboard from "@/components/Keyboard";
 import { useState, useEffect } from "react";
@@ -195,41 +196,61 @@ export default function Home() {
   }, [word, isPlaying]);
 
   return (
-    <div className="flex flex-col justify-between items-start  h-[100vh] w-full m-0 p-0 ">
-      <div className="my-4 md:w-[604px] w-full flex justify-end items-end  mx-auto px-8">
-        <IoRefreshOutline
-          className="md:w-6 md:h-6 w-5 h-5 cursor-pointer"
-          onClick={() => refresh()}
+    <div>
+      <Head>
+        <title>Wordle game</title>
+        <meta name="description" content="Guess the Hidden Word" key="desc" />
+        <meta property="og:title" content="Wordle Game" />
+        <meta
+          property="og:description"
+          content="Can you guess the hidden word in 6 tries?"
+        />
+        <meta property="og:image" content="/logo.png" />
+      </Head>
+      <div className="flex flex-col justify-between items-start  h-[100vh] w-full m-0 p-0 ">
+        <div className="my-4 md:w-[604px] w-full flex justify-between mx-auto px-16">
+          <div className="flex flex-row">
+            {" "}
+            <img src="/logo.png" width={24} height={24} />{" "}
+            <strong className="text-xl">.</strong>
+          </div>
+          <IoRefreshOutline
+            className="md:w-6 md:h-6 w-5 h-5 cursor-pointer"
+            onClick={() => refresh()}
+          />
+        </div>
+        <Colums
+          word={word}
+          isWord={isWord}
+          count={count}
+          finalWord={finalWord}
+          guessedWords={guessedWords}
+        />
+        {popUp && (popUp == "lose" ? <Lost /> : <Won />)}
+        <Keyboard
+          finalWord={finalWord}
+          guessedWords={guessedWords}
+          handKeyDown={handKeyDown}
+        />
+
+        <div className="bottom-0 justify-self-end">
+          <Description />
+          <p className="bg-[#ecf0e2] w-full text-center text-gray-500 md:text-xs text-[10px] pb-4">
+            @2023 developed by{" "}
+            <a
+              href="https://www.michich.com/"
+              className="font-bold md:text-xs text-[10px] hover:underline"
+            >
+              Chaimae Michich
+            </a>{" "}
+          </p>
+        </div>
+        {popUp == "win" && <Confetti popUp={popUp} />}
+        <ToastContainer
+          position="top-center"
+          autoClose={isWord ? false : 1000}
         />
       </div>
-      <Colums
-        word={word}
-        isWord={isWord}
-        count={count}
-        finalWord={finalWord}
-        guessedWords={guessedWords}
-      />
-      {popUp && (popUp == "lose" ? <Lost /> : <Won />)}
-      <Keyboard
-        finalWord={finalWord}
-        guessedWords={guessedWords}
-        handKeyDown={handKeyDown}
-      />
-
-      <div className="bottom-0 justify-self-end">
-        <Description />
-        <p className="bg-[#ecf0e2] w-full text-center text-gray-500 md:text-xs text-[10px] pb-4">
-          @2023 developed by{" "}
-          <a
-            href="https://www.michich.com/"
-            className="font-bold md:text-xs text-[10px] hover:underline"
-          >
-            Chaimae Michich
-          </a>{" "}
-        </p>
-      </div>
-      {popUp == "win" && <Confetti popUp={popUp} />}
-      <ToastContainer position="top-center" autoClose={isWord ? false : 1000} />
     </div>
   );
 }
